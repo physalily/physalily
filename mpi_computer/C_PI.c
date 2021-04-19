@@ -23,7 +23,7 @@ int main()
 	printf("\n");
 	printf(" Calculated Pi = %.16f\n", area);
 	printf("          M_Pi = %.16f\n", M_PI);
-	printf("Relative error = %.16f\n", fabs(area - M_PI);
+	printf("Relative error = %.16f\n", fabs(area - M_PI));
 	
 	return 0;
 }
