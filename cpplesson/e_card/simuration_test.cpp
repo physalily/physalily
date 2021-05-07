@@ -6,7 +6,7 @@
 int main()
 {
 	// parameter for simulation.
-	size_t simulation_iter;
+	size_t simulation_iter = 100;
 
 	// result parameter.
 	int slave_win = 0;
@@ -27,12 +27,14 @@ int main()
 	for (size_t i = 0; i < simulation_iter; i++) {
 		slave_card = dist(engine);
 		king_card = dist(engine);
-		std::cout << slave_card << std::endl;
-		std::cout << king_card << std::endl;
+		// std::cout << "s" << slave_card << std::endl;
+		// std::cout << "k" << king_card << std::endl;
 		if (slave_card == 1 && king_card == 5)
 			slave_win++;
-		else if(slave_card < king_card)
+		else if (slave_card < king_card)
 			king_win++;
+		else if (king_card < slave_card)
+			slave_win++;
 		else 
 			std::cout << "error... whoever won.";
 	}
