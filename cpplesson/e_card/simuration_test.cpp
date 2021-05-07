@@ -2,41 +2,50 @@
 #include <cstdlib>
 #include <time.h>
 #include <random>
+#include <vector>
 
 int main()
 {
 	// parameter for simulation.
-	size_t simulation_iter = 100;
+	int simulation_iter = 100;
 
 	// result parameter.
 	int slave_win = 0;
 	int king_win = 0;
-	
-	// valiable for simulation.
-	int slave_card = 0;
-	int king_card = 0;
 
 	// random setup
 	// seed settings
 	std::random_device seed_gen;
 	std::default_random_engine engine(seed_gen());
-	// generate random number 1 to 5
-	std::uniform_int_distribution<> dist(1, 5);
+	// 0 to 4 dist cause it use in array index.
+	std::uniform_int_distribution<> nomally_dist(0, 4);
+	
+	// input simulation loop times
+	std::cout << "input simulation loop times in int: ";
+	std::cin >> simulation_iter;
+	
+	// valiable for simulation.
+	std::vector<std::vector<int>> slave_card_set(5, std::vector<int>(simulation_iter, 2));
+	std::vector<std::vector<int>> king_card_set(5, std::vector<int>(simulation_iter, 2));
 
 	// main loop
 	for (size_t i = 0; i < simulation_iter; i++) {
-		slave_card = dist(engine);
-		king_card = dist(engine);
-		// std::cout << "s" << slave_card << std::endl;
-		// std::cout << "k" << king_card << std::endl;
-		if (slave_card == 1 && king_card == 5)
-			slave_win++;
-		else if (slave_card < king_card)
-			king_win++;
-		else if (king_card < slave_card)
-			slave_win++;
-		else 
-			std::cout << "error... whoever won.";
+		slave_card_set[nomally_dist(engine)][i] = 1;
+		king_card_set[nomally_dist(engine)][i] = 3;
+		for (size_t take = 0; take < 5; take++) {
+			if (slave_card_set[take][i] == 1 && king_card_set[take][i] == 3) {
+				slave_win++;
+				break;
+			}
+			else if (slave_card_set[take][i] < king_card_set[take][i]) {
+				king_win++;
+				break;
+			}
+			else {
+				king_win++;
+				break;
+			}	
+		}
 	}
 
 	// display result
