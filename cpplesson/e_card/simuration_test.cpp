@@ -35,15 +35,15 @@ int main()
 		for (size_t take = 0; take < 5; take++) {
 			if (slave_card_set[take][i] == 1 && king_card_set[take][i] == 3) {
 				slave_win++;
-				break;
+				// break;
 			}
 			else if (slave_card_set[take][i] < king_card_set[take][i]) {
 				king_win++;
-				break;
+				// break;
 			}
 			else {
 				king_win++;
-				break;
+				// break;
 			}	
 		}
 	}
